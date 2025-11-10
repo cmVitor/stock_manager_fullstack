@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('cpf')->unique();
-            $table->enum('role', ['admin', 'funcionario', 'gerente'])->default('funcionario');
-            $table->string('password');
+            $table->string('nome', 80)->unique();
+            $table->string('telefone', 25);
+            $table->string('email', 80);
+            
+            
+            $table->foreignId('address_id')->constrained('addresses')->restrictOnDelete();
+
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('suppliers');
     }
 };

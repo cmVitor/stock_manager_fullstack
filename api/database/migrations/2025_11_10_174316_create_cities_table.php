@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('cpf')->unique();
-            $table->enum('role', ['admin', 'funcionario', 'gerente'])->default('funcionario');
-            $table->string('password');
+
+            $table->integer('codigo');
+            $table->string('name', 255);
+            $table->char('uf', 2);
+
+            $table->foreign('uf')->references('uf')->on('states')->restrictOnDelete();
+
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cities');
     }
 };
