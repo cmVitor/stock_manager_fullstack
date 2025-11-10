@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('lots', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('cpf')->unique();
-            $table->enum('role', ['admin', 'funcionario', 'gerente'])->default('funcionario');
-            $table->string('password');
+            $table->string('description', 100);
+            $table->date('expiration date');
+
+            $table->foreignId('deposit_location_id')->constrained('deposit_locations')->restrictOnDelete();
+
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('lots');
     }
 };

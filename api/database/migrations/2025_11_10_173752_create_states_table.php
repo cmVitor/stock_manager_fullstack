@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('cpf')->unique();
-            $table->enum('role', ['admin', 'funcionario', 'gerente'])->default('funcionario');
-            $table->string('password');
+            $table->integer('codigouf');
+            $table->string('name', 30)->unique();
+            $table->char('uf', 2)->unique();
+
+            $table->foreignId('region')->constrained('regions')->restrictOnDelete();
+            
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('states');
     }
 };
