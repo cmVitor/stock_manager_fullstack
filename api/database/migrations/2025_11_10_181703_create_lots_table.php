@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('lots', function (Blueprint $table) {
             $table->id();
             $table->string('description', 100);
-            $table->date('expiration date');
+            $table->date('expiration_date');
 
             $table->foreignId('deposit_location_id')->constrained('deposit_locations')->restrictOnDelete();
 

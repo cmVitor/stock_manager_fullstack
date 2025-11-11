@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('cpf')->unique();
-            $table->enum('role', ['admin', 'funcionario', 'gerente'])->default('funcionario');
+            $table->enum('role', ['admin', 'funcionario'])->default('funcionario');
             $table->string('password');
             $table->timestamps();
         });
