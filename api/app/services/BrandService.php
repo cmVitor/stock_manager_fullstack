@@ -37,9 +37,9 @@ class BrandService
     // Criar nova marca
     public function create(array $data)
     {
-        if (empty($data['nome'])) {
+        if (empty($data['name'])) {
             throw ValidationException::withMessages([
-                'nome' => ['O campo nome é obrigatório.'],
+                'name' => ['O campo nome é obrigatório.'],
             ]);
         }
 

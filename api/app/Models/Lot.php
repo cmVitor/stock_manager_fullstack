@@ -15,7 +15,7 @@ class Lot extends Model
         'deposit_location_id'
     ];
 
-    public function deposit()
+    public function depositLocation()
     {
         return $this->belongsTo(DepositLocation::class);
     }

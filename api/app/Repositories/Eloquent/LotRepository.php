@@ -11,4 +11,9 @@ class LotRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function with(array $relations)
+    {
+        return $this->model->with($relations);
+    }
 }

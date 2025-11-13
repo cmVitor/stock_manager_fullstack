@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Repositories\Eloquent\CategoryRepository;
 use Illuminate\Validation\ValidationException;
 
-class BrandService
+class CategoryService
 {
     protected $categoryRepository;
 
@@ -37,9 +37,9 @@ class BrandService
     // Criar nova categoria
     public function create(array $data)
     {
-        if (empty($data['nome'])) {
+        if (empty($data['name'])) {
             throw ValidationException::withMessages([
-                'nome' => ['O campo nome é obrigatório.'],
+                'name' => ['O campo nome é obrigatório.'],
             ]);
         }
 
