@@ -14,6 +14,7 @@ class Product extends Model
         'code',
         'min_quantity',
         'nutrition_facts',
+        'perishable',
         'unit_id',
         'brand_id',
         'category_id'
