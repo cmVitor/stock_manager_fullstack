@@ -11,4 +11,9 @@ class SupplierRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function getAll(array $relations = [])
+{
+    return Supplier::with($relations)->get();
+}
 }

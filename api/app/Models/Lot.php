@@ -15,6 +15,7 @@ class Lot extends Model
         'deposit_location_id'
     ];
 
+    //o nome desse metodo é importante pois ele vai buscar um deposit_location_id para fazer joins
     public function depositLocation()
     {
         return $this->belongsTo(DepositLocation::class);

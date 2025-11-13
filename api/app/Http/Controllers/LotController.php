@@ -17,7 +17,7 @@ class LotController extends Controller
     // GET /api/lotes
     public function index()
     {
-        $lots = $this->lotService->getAll();
+        $lots = $this->lotService->getLotDetails();
         return response()->json($lots);
     }
 
