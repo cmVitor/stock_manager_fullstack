@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('cpf')->unique();
             $table->enum('role', ['admin', 'funcionario'])->default('funcionario');
             $table->string('password');
+            
+            $table->foreignId('address_id')->constrained('addresses')->restrictOnDelete();
+
             $table->timestamps();
         });
 

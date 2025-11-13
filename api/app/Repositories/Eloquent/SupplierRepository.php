@@ -13,7 +13,7 @@ class SupplierRepository extends BaseRepository
     }
 
     public function getAll(array $relations = [])
-{
-    return Supplier::with($relations)->get();
-}
+    {
+        return Supplier::with($relations)->get();
+    }
 }
