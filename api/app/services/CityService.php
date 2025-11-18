@@ -17,12 +17,12 @@ class CityService
 
     public function getAll()
     {
-        return $this->cityRepository->getAll();
+        return $this->cityRepository->all();
     }
 
     public function getById($id)
     {
-        $city = $this->cityRepository->getById($id);
+        $city = $this->cityRepository->find($id);
 
         if (!$city) {
             throw new ModelNotFoundException("City not found.");
@@ -39,7 +39,7 @@ class CityService
 
     public function update($id, array $data)
     {
-        $city = $this->cityRepository->getById($id);
+        $city = $this->cityRepository->find($id);
 
         if (!$city) {
             throw new ModelNotFoundException("City not found for update.");
@@ -50,14 +50,10 @@ class CityService
 
     public function delete($id)
     {
-        $city = $this->cityRepository->getById($id);
+        $city = $this->cityRepository->find($id);
 
         if (!$city) {
             throw new ModelNotFoundException("City not found for deletion.");
-        }
-
-        if ($this->cityRepository->addresses()->exists()) {
-             throw new Exception("Não é possível excluir uma cidade que possui endereços associados.");
         }
 
         return $this->cityRepository->delete($id);

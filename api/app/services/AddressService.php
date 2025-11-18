@@ -17,12 +17,12 @@ class AddressService
 
     public function getAll()
     {
-        return $this->addressRepository->getAll();
+        return $this->addressRepository->all();
     }
 
     public function getById($id)
     {
-        $address = $this->addressRepository->getById($id);
+        $address = $this->addressRepository->find($id);
 
         if (!$address) {
             throw new ModelNotFoundException("Address not found.");
@@ -39,7 +39,7 @@ class AddressService
 
     public function update($id, array $data)
     {
-        $address = $this->addressRepository->getById($id);
+        $address = $this->addressRepository->find($id);
 
         if (!$address) {
             throw new ModelNotFoundException("Address not found for update.");
@@ -50,14 +50,10 @@ class AddressService
 
     public function delete($id)
     {
-        $address = $this->addressRepository->getById($id);
+        $address = $this->addressRepository->find($id);
 
         if (!$address) {
             throw new ModelNotFoundException("Address not found for deletion.");
-        }
-
-        if ($this->addressRepository->lots()->exists()) {
-             throw new Exception("Não é possível excluir um endereço que possui usuarios associados.");
         }
 
         return $this->addressRepository->delete($id);
