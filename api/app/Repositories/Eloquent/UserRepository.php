@@ -16,4 +16,8 @@ class UserRepository extends BaseRepository
     {
         return $this->model->where('email', $email)->first();
     }
+    public function getAll(array $relations = [])
+    {
+        return User::with($relations)->get();
+    }
 }

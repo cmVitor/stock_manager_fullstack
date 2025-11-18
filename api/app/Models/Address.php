@@ -27,4 +27,9 @@ class Address extends Model
     {
         return $this->hasOne(Supplier::class);
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

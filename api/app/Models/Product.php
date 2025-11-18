@@ -14,6 +14,7 @@ class Product extends Model
         'code',
         'min_quantity',
         'nutrition_facts',
+        'perishable',
         'unit_id',
         'brand_id',
         'category_id'
@@ -41,5 +42,9 @@ class Product extends Model
     public function movementItems()
     {
         return $this->hasMany(MovementItem::class);
+    }
+    public function stockItems()
+    {
+        return $this->hasMany(StockItem::class);
     }
 }

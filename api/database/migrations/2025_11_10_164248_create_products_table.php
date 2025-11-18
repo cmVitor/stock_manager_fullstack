@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 85);
             $table->string('code', 20)->unique();
             $table->integer('min_quantity')->check('min_quantity >= 0');
+            $table->boolean('perishable')->default(true);
             $table->json('nutrition_facts')->nullable();
 
             //chaves estrangeiras que Impedem apagar o pai se existirem filhos

@@ -10,12 +10,13 @@ class Lot extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description', 
-        'expiration_date', 
+        'description',
+        'expiration_date',
         'deposit_location_id'
     ];
 
-    public function deposit()
+    //o nome desse metodo é importante pois ele vai buscar um deposit_location_id para fazer joins
+    public function depositLocation()
     {
         return $this->belongsTo(DepositLocation::class);
     }
@@ -25,4 +26,8 @@ class Lot extends Model
         return $this->hasMany(MovementItem::class);
     }
 
+    public function stockItems()
+    {
+        return $this->hasMany(StockItem::class);
+    }
 }

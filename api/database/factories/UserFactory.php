@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ class UserFactory extends Factory
             'cpf' => fake()->unique()->numerify('###########'),
             'role' => fake()->randomElement(['admin', 'funcionario']),
             'password' => static::$password ??= Hash::make('password'),
+            'address_id' => Address::factory(),
         ];
     }
 }

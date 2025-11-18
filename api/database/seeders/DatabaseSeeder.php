@@ -29,19 +29,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //Cria um user admin
-        User::factory()->create([
-            'name' => 'Vitor Martins',
-            'email' => 'vitor@gmail.com',
-            'cpf' => '70223402184',
-            'role' => 'admin',
-            'password' => Hash::make('vitor123'),
-        ]);
-
-        //Chama a factory pra criar  users
-        User::factory(5)->create([
-            'role' => 'funcionario',
-        ]);
 
         // Categorias, marcas e unidades
         $categories = Category::factory(5)->create();
@@ -61,6 +48,21 @@ class DatabaseSeeder extends Seeder
         ]);
         $suppliers = Supplier::factory(5)->create([
             'address_id' => $addresses->random()->id
+        ]);
+
+        //Cria um user admin
+        User::factory()->create([
+            'name' => 'Vitor Martins',
+            'email' => 'vitor@gmail.com',
+            'cpf' => '70223402184',
+            'role' => 'admin',
+            'password' => Hash::make('vitor123'),
+            'address_id' => $addresses->random()->id
+        ]);
+
+        //Chama a factory pra criar  users
+        User::factory(5)->create([
+            'role' => 'funcionario',
         ]);
 
         //Locais de desposito e lotes

@@ -11,4 +11,14 @@ class LotRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function with(array $relations)
+    {
+        return $this->model->with($relations);
+    }
+
+    public function findByDescription($description)
+    {
+        return $this->model->where('description', $description)->first();
+    }
 }
