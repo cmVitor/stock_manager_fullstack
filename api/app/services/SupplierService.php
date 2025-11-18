@@ -21,7 +21,7 @@ class SupplierService
 
     public function getById($id)
     {
-        $supplier = $this->supplierRepository->getById($id, ['address.city.state']);
+        $supplier = $this->supplierRepository->find($id, ['address.city.state']);
 
         if (!$supplier) {
             throw new ModelNotFoundException("Supplier not found.");
@@ -38,7 +38,7 @@ class SupplierService
 
     public function update($id, array $data)
     {
-        $supplier = $this->supplierRepository->getById($id);
+        $supplier = $this->supplierRepository->find($id);
 
         if (!$supplier) {
             throw new ModelNotFoundException("Supplier not found for update.");
@@ -49,7 +49,7 @@ class SupplierService
 
     public function delete($id)
     {
-        $supplier = $this->supplierRepository->getById($id);
+        $supplier = $this->supplierRepository->find($id);
 
         if (!$supplier) {
             throw new ModelNotFoundException("Supplier not found for deletion.");

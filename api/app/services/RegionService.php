@@ -17,12 +17,12 @@ class RegionService
 
     public function getAll()
     {
-        return $this->regionRepository->getAll();
+        return $this->regionRepository->all();
     }
 
     public function getById($id)
     {
-        $region = $this->regionRepository->getById($id);
+        $region = $this->regionRepository->find($id);
 
         if (!$region) {
             throw new ModelNotFoundException("Region not found.");
@@ -39,7 +39,7 @@ class RegionService
 
     public function update($id, array $data)
     {
-        $region = $this->regionRepository->getById($id);
+        $region = $this->regionRepository->find($id);
 
         if (!$region) {
             throw new ModelNotFoundException("Region not found for update.");
@@ -50,14 +50,10 @@ class RegionService
 
     public function delete($id)
     {
-        $region = $this->regionRepository->getById($id);
+        $region = $this->regionRepository->find($id);
 
         if (!$region) {
             throw new ModelNotFoundException("Region not found for deletion.");
-        }
-
-        if ($this->regionRepository->states()->exists()) {
-             throw new Exception("Não é possível excluir uma regiao que possui estados associados.");
         }
 
         return $this->regionRepository->delete($id);

@@ -28,7 +28,7 @@ class MovementItem extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function batch()
+    public function lot()
     {
         return $this->belongsTo(Lot::class);
     }

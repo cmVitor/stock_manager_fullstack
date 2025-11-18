@@ -11,4 +11,9 @@ class StockMovementRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function getAll(array $relations = [])
+    {
+        return StockMovement::with($relations)->get();
+    }
 }

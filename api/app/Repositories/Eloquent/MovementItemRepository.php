@@ -11,4 +11,9 @@ class MovementItemRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function deleteByMovement(int $movementId)
+    {
+        return MovementItem::where('movement_id', $movementId)->delete();
+    }
 }

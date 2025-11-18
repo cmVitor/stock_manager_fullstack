@@ -11,4 +11,9 @@ class StockItemRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function findByProductAndLot($productId, $lotId)
+    {
+        return $this->model::where('product_id', $productId)->where('lot_id', $lotId)->first();
+    }
 }

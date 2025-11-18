@@ -17,12 +17,12 @@ class DespositLocationService
 
     public function getAll()
     {
-        return $this->depositLocationRepository->getAll();
+        return $this->depositLocationRepository->all();
     }
 
      public function getById($id)
     {
-        $depositLocation = $this->depositLocationRepository->getById($id);
+        $depositLocation = $this->depositLocationRepository->find($id);
 
         if (!$depositLocation) {
             throw new ModelNotFoundException("Localização de depósito não encontrada.");
@@ -38,7 +38,7 @@ class DespositLocationService
 
     public function update($id, array $data)
     {
-        $depositLocation = $this->depositLocationRepository->getById($id);
+        $depositLocation = $this->depositLocationRepository->find($id);
 
         if (!$depositLocation) {
             throw new ModelNotFoundException("Localização de depósito não encontrada para atualização.");
@@ -49,7 +49,7 @@ class DespositLocationService
 
     public function delete($id)
     {
-        $depositLocation = $this->depositLocationRepository->getById($id);
+        $depositLocation = $this->depositLocationRepository->find($id);
 
         if (!$depositLocation) {
             throw new ModelNotFoundException("Localização de depósito não encontrada para exclusão.");

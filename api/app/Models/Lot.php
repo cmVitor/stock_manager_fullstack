@@ -10,8 +10,8 @@ class Lot extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description', 
-        'expiration_date', 
+        'description',
+        'expiration_date',
         'deposit_location_id'
     ];
 
@@ -26,4 +26,8 @@ class Lot extends Model
         return $this->hasMany(MovementItem::class);
     }
 
+    public function stockItems()
+    {
+        return $this->hasMany(StockItem::class);
+    }
 }

@@ -16,4 +16,9 @@ class LotRepository extends BaseRepository
     {
         return $this->model->with($relations);
     }
+
+    public function findByDescription($description)
+    {
+        return $this->model->where('description', $description)->first();
+    }
 }

@@ -7,11 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class StockItem extends Model
 {
     protected $fillable = [
-        'product',
-        'lot',
+        'product_id',
+        'lot_id',
         'expiration_date',
         'balance',
         'min_quantity',
-        'status'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function lot()
+    {
+        return $this->belongsTo(Lot::class);
+    }
 }
