@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Eloquent\StockItemRepository;
 use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\LotRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class StockItemService
@@ -23,9 +24,6 @@ class StockItemService
         $this->lotRepo = $lotRepo;
     }
 
-    /**
-     * Retorna o estoque no formato esperado pelo frontend
-     */
     public function getAll()
     {
         $items = $this->stockRepo->all(['product', 'lot']);
@@ -37,15 +35,12 @@ class StockItemService
                 'produtoNome' => $item->product->name,
                 'lote' => $item->lot->description,
                 'validade' => $item->lot->expiration_date,
-                'saldo' => $item->quantity,
+                'saldo' => $item->balance,
                 'quantidadeMinima' => $item->product->min_quantity ?? 0
             ];
         });
     }
 
-    /**
-     * Lógica EXATA baseada no front-end
-     */
     public function adjustStockByMovement(array $mov)
     {
         return DB::transaction(function () use ($mov) {
@@ -69,7 +64,7 @@ class StockItemService
                         throw new \Exception("Não há estoque para o produto {$item['product_id']} no lote {$lot->id}.");
                     }
 
-                    // Saldo insuficiente → não pode colocar negativo
+                    // Saldo insuficiente -> não pode colocar negativo
                     if ($stock->balance < $item['quantity']) {
                         throw new \Exception(
                             "Saldo insuficiente para o produto {$item['product_id']} no lote {$lot->id}. " .
@@ -109,4 +104,35 @@ class StockItemService
             }
         });
     }
+
+    public function getStockDetails()
+{
+    // Carregar estoque + relações necessárias
+    $items = $this->stockRepo->all(['product', 'lot']);
+
+    return $items->map(function ($item) {
+
+        $hoje = now();
+        $validade = Carbon::parse($item->expiration_date);
+
+        // Diferença em dias (negativo significa expirado)
+        $dias = $validade->diffInDays($hoje, false);
+
+        return [
+            'id'               => $item->id,
+            'product_id'       => $item->product_id,
+            'produto_nome'     => $item->product->name ?? null,
+            'lote_description' => $item->lot->description ?? null,
+            'expiration_date'  => $item->expiration_date,
+            'balance'          => $item->balance,
+            'min_quantity'     => $item->min_quantity,
+
+            // Cálculos
+            'diasParaVencer'   => $dias,
+            'expirado'         => $dias < 0,
+            'pertoDeVencer'    => $dias >= 0 && $dias <= 30,
+            'estoqueCritico'   => $item->balance <= $item->min_quantity,
+        ];
+    });
+}
 }
