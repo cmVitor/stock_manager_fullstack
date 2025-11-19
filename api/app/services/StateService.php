@@ -17,12 +17,12 @@ class StateService
 
     public function getAll()
     {
-        return $this->stateRepository->getAll();
+        return $this->stateRepository->all();
     }
 
     public function getById($id)
     {
-        $state = $this->stateRepository->getById($id);
+        $state = $this->stateRepository->find($id);
 
         if (!$state) {
             throw new ModelNotFoundException("State not found.");
@@ -39,7 +39,7 @@ class StateService
 
     public function update($id, array $data)
     {
-        $state = $this->stateRepository->getById($id);
+        $state = $this->stateRepository->find($id);
 
         if (!$state) {
             throw new ModelNotFoundException("State not found for update.");
@@ -50,14 +50,10 @@ class StateService
 
     public function delete($id)
     {
-        $state = $this->stateRepository->getById($id);
+        $state = $this->stateRepository->find($id);
 
         if (!$state) {
             throw new ModelNotFoundException("State not found for deletion.");
-        }
-
-        if ($this->stateRepository->cities()->exists()) {
-             throw new Exception("Não é possível excluir um estado que possui cidades associados.");
         }
 
         return $this->stateRepository->delete($id);

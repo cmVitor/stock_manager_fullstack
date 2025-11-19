@@ -14,9 +14,18 @@ class StockItemController extends Controller
         $this->stockItemService = $stockItemService;
     }
 
+    //GET /api/estoque
     public function index()
     {
         $stockItems = $this->stockItemService->getStockDetails();
         return response()->json($stockItems);
+    }
+
+    //DELETE /api/estoque/{id}
+    public function destroy($id)
+    {
+        return response()->json(
+            $this->stockItemService->delete($id)
+        );
     }
 }

@@ -6,6 +6,7 @@ use App\Repositories\Eloquent\StockItemRepository;
 use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\LotRepository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
 class StockItemService
@@ -106,33 +107,44 @@ class StockItemService
     }
 
     public function getStockDetails()
-{
-    // Carregar estoque + relações necessárias
-    $items = $this->stockRepo->all(['product', 'lot']);
+    {
+        // Carregar estoque + relações necessárias
+        $items = $this->stockRepo->all(['product', 'lot']);
 
-    return $items->map(function ($item) {
+        return $items->map(function ($item) {
 
-        $hoje = now();
-        $validade = Carbon::parse($item->expiration_date);
+            $hoje = now();
+            $validade = Carbon::parse($item->expiration_date);
 
-        // Diferença em dias (negativo significa expirado)
-        $dias = $validade->diffInDays($hoje, false);
+            // Diferença em dias (negativo significa expirado)
+            $dias = $validade->diffInDays($hoje, false);
 
-        return [
-            'id'               => $item->id,
-            'product_id'       => $item->product_id,
-            'produto_nome'     => $item->product->name ?? null,
-            'lote_description' => $item->lot->description ?? null,
-            'expiration_date'  => $item->expiration_date,
-            'balance'          => $item->balance,
-            'min_quantity'     => $item->min_quantity,
+            return [
+                'id'               => $item->id,
+                'product_id'       => $item->product_id,
+                'produto_nome'     => $item->product->name ?? null,
+                'lote_description' => $item->lot->description ?? null,
+                'expiration_date'  => $item->expiration_date,
+                'balance'          => $item->balance,
+                'min_quantity'     => $item->min_quantity,
 
-            // Cálculos
-            'diasParaVencer'   => $dias,
-            'expirado'         => $dias < 0,
-            'pertoDeVencer'    => $dias >= 0 && $dias <= 30,
-            'estoqueCritico'   => $item->balance <= $item->min_quantity,
-        ];
-    });
-}
+                // Cálculos
+                'diasParaVencer'   => $dias,
+                'expirado'         => $dias < 0,
+                'pertoDeVencer'    => $dias >= 0 && $dias <= 30,
+                'estoqueCritico'   => $item->balance <= $item->min_quantity,
+            ];
+        });
+    }
+
+    public function delete($id)
+    {
+        $stock = $this->stockRepo->find($id);
+
+        if (!$stock) {
+            throw new ModelNotFoundException("Item de estoque não encontrado para exclusão.");
+        }
+
+        return $this->stockRepo->delete($id);
+    }
 }
