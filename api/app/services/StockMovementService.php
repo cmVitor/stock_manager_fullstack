@@ -28,6 +28,11 @@ class StockMovementService
         return $this->movementRepo->all(['movementItems']);
     }
 
+    public function getById($id)
+    {
+        return $this->movementRepo->find($id);
+    }
+
     public function create(array $data)
     {
         return DB::transaction(function () use ($data) {

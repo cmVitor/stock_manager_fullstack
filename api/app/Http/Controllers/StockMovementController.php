@@ -14,22 +14,35 @@ class StockMovementController extends Controller
         $this->movementService = $movementService;
     }
 
+    //POST /api/movements
     public function store(Request $request)
     {
-        try {
-            $movement = $this->movementService->create($request->all());
+        $movement = $this->movementService->create($request->all());
 
-            return response()->json([
-                'message' => 'Movimentação criada com sucesso!',
-                'data' => $movement
-            ], 201);
+        return response()->json([
+            'message' => 'Movimentação criada com sucesso!',
+            'data' => $movement
+        ], 201);
+    }
 
-        } catch (\Exception $e) {
+    //GET /api/movements
+    public function index()
+    {
+        $movements = $this->movementService->getAll();
+        return response()->json($movements);
+    }
 
-            return response()->json([
-                'error' => 'Erro ao criar movimentação.',
-                'message' => $e->getMessage()
-            ], 500);
-        }
+    //DElETE /api/movements/{id}
+    public function destroy($id)
+    {
+        return response()->json(
+            $this->movementService->delete($id)
+        );
+    }
+
+    public function show($id)
+    {
+        $movement = $this->movementService->getById($id);
+        return response()->json($movement);
     }
 }

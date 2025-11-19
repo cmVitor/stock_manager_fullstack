@@ -19,6 +19,17 @@ class ProductService
         return $this->productRepository->all();
     }
 
+    public function getById($id)
+    {
+        $product = $this->productRepository->find($id);
+
+        if(!$product) {
+            throw new ModelNotFoundException("Produto não encontrado");
+        }
+
+        return $product;    
+    }
+
     public function create(array $data)
     {
         return $this->productRepository->create($data);

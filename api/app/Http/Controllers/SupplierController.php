@@ -14,10 +14,33 @@ class SupplierController extends Controller
         $this->supplierService = $supplierService;
     }
 
-    // GET /api/lotes
+    // GET /api/Fornecedores
     public function index()
     {
         $suppliers = $this->supplierService->getSupplierDetails();
         return response()->json($suppliers);
     }
+
+    //POST /api/fornecedores
+    public function store(Request $request)
+    {
+        $supplier = $this->supplierService->create($request->all());
+        return response()->json($supplier);
+    }
+
+    //UPDATE /api/fornecedores
+    public function update(Request $request, $id)
+    {
+        $supplier = $this->supplierService->update($id, $request->all());
+        return response()->json($supplier);
+    }
+
+    //DELETE /api/fornecedores{id}
+    public function destroy($id)
+    {
+        return response()->json(
+            $this->supplierService->delete($id)
+        );
+    }
+
 }

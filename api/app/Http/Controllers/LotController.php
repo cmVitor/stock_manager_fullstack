@@ -33,4 +33,26 @@ class LotController extends Controller
         $lot = $this->lotService->create($data);
         return response()->json($lot, 201);
     }
+
+    //GET /api/lotes/{id}
+    public function show($id)
+    {
+        $lot = $this->lotService->getById($id);
+        return response()->json($lot);
+    }
+
+    //UPDATE /api/lotes/{id}
+    public function update(Request $request, $id)
+    {
+        $lot = $this->lotService->update($id, $request->all());
+        return response()->json($lot);
+    }
+
+    //DELETE /api/lotes{id}
+    public function destroy($id)
+    {
+        return response()->json(
+            $this->lotService->delete($id)
+        );
+    }
 }

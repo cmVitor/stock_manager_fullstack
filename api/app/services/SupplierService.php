@@ -55,8 +55,6 @@ class SupplierService
             throw new ModelNotFoundException("Supplier not found for deletion.");
         }
 
-        // TODO: validar se há movimentações associadas
-
         return $this->supplierRepository->delete($id);
     }
 

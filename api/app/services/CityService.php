@@ -25,10 +25,21 @@ class CityService
         $city = $this->cityRepository->find($id);
 
         if (!$city) {
-            throw new ModelNotFoundException("City not found.");
+            throw new ModelNotFoundException("Cidade não encontrada");
         }
 
         return $city;
+    }
+
+    public function getByUf($uf)
+    {
+        $cities = $this->cityRepository->getByUf($uf);
+
+        if($cities->isEmpty()) {
+            throw new ModelNotFoundException("Não foi encontrado cidades com esse uf");
+        }
+
+        return $cities;
     }
 
     public function create(array $data)
@@ -42,7 +53,7 @@ class CityService
         $city = $this->cityRepository->find($id);
 
         if (!$city) {
-            throw new ModelNotFoundException("City not found for update.");
+            throw new ModelNotFoundException("Cidade não encontrada");
         }
 
         return $this->cityRepository->update($id, $data);
@@ -53,7 +64,7 @@ class CityService
         $city = $this->cityRepository->find($id);
 
         if (!$city) {
-            throw new ModelNotFoundException("City not found for deletion.");
+            throw new ModelNotFoundException("Cidade não encontrada");
         }
 
         return $this->cityRepository->delete($id);

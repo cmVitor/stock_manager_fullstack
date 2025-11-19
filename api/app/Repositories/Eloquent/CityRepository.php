@@ -11,4 +11,9 @@ class CityRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function getByUf($uf)
+    {
+        return $this->model->where('uf', $uf)->orderBy('name')->get();;
+    }
 }
