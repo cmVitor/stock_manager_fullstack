@@ -6,6 +6,7 @@ use App\Repositories\Eloquent\LotRepository;
 use App\Repositories\Eloquent\DepositLocationRepository;
 use Exception;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class LotService
 {
@@ -114,5 +115,30 @@ class LotService
                 'section' => $lot->depositLocation->section ?? null,
             ];
         });
+    }
+
+    public function createLotWithLocation(array $data)
+    {
+        try {
+            return DB::transaction(function () use ($data) {
+                // Primeiro, cria a deposit_location
+                $depositLocation = $this->depositRepository->create([
+                    'aisle' => $data['corredor'],
+                    'shelf' => $data['prateleira'],
+                    'section' => $data['secao'],
+                ]);
+
+                // Depois, cria o lote com o deposit_location_id
+                $lot = $this->lotRepository->create([
+                    'description' => $data['descricao'],
+                    'expiration_date' => $data['dataValidade'],
+                    'deposit_location_id' => $depositLocation->id,
+                ]);
+
+                return $lot;
+            });
+        } catch (Exception $e) {
+            throw new Exception('Erro ao criar lote: ' . $e->getMessage());
+        }
     }
 }

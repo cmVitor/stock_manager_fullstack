@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
             'code' => ['required', 'string', 'max:20', 'unique:products,code'],
             'min_quantity' => ['required', 'integer', 'min:0'],
             'perishable' => ['boolean'],
-            'nutrition_facts' => ['nullable', 'array'], // JSON ⇒ array
+            'nutrition_facts' => ['nullable', 'array'], // JSON -> array
             'unit_id' => ['required', 'integer', 'exists:measurement_units,id'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'brand_id' => ['required', 'integer', 'exists:brands,id'],

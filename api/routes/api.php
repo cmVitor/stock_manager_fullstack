@@ -23,3 +23,7 @@ Route::post('/movimentacao', [StockMovementController::class, 'store']);
 Route::get('/estoque', [StockItemController::class, 'index']);
 
 Route::get('/cidades/{uf}', [CityController::class, 'getCitiesByUf']);
+
+Route::post('/fornecedores', [SupplierController::class, 'postSupplierAndAddress']);
+
+Route::post('/lotes', [LotController::class, 'store']);
