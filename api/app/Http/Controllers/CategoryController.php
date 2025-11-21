@@ -32,14 +32,14 @@ class CategoryController extends Controller
     // POST /api/categorias
     public function store(CategoryRequest $request)
     {
-        $category = $this->categoryService->create($request->validate());
+        $category = $this->categoryService->create($request->validated());
         return response()->json($category, 201);
     }
 
     // PUT /api/categorias/{id}
     public function update(CategoryRequest $request, $id)
     {
-        $category = $this->categoryService->update($id, $request->validate());
+        $category = $this->categoryService->update($id, $request->validated());
         return response()->json($category);
     }
 

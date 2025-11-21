@@ -22,7 +22,7 @@ class BrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|sring|max:55'
+            'name' => 'required|string|max:55'
         ];
     }
 }

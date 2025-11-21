@@ -2,16 +2,21 @@
 
 namespace App\Services;
 
+use App\Repositories\Eloquent\AddressRepository;
 use App\Repositories\Eloquent\SupplierRepository;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class SupplierService
 {
     protected $supplierRepository;
+    protected $addressRepository;
 
-    public function __construct(SupplierRepository $supplierRepository)
+    public function __construct(SupplierRepository $supplierRepository, AddressRepository $addressRepository)
     {
         $this->supplierRepository = $supplierRepository;
+        $this->addressRepository = $addressRepository;
     }
 
     public function getAll()
@@ -74,5 +79,34 @@ class SupplierService
                 'bairro' => $supplier->address->bairro ?? null,
             ];
         });
+    }
+
+    public function createSupplierWithAddress(array $data)
+    {
+        try {
+            return DB::transaction(function () use ($data) {
+                // Primeiro, cria o address
+                $address = $this->addressRepository->create([
+                    'logradouro' => $data['logradouro'],
+                    'number' => $data['number'],
+                    'complemento' => $data['complemento'],
+                    'city_id' => $data['city_id'],
+                    'bairro' => $data['bairro'],
+                    'cep' => $data['cep'],
+                ]);
+
+                // Depois, cria o supplier com o address_id
+                $supplier = $this->supplierRepository->create([
+                    'name' => $data['name'],
+                    'phone' => $data['phone'],
+                    'email' => $data['email'],
+                    'address_id' => $address->id,
+                ]);
+
+                return $supplier;
+            });
+        } catch (Exception $e) {
+            throw new Exception('Erro ao criar fornecedor: ' . $e->getMessage());
+        }
     }
 }

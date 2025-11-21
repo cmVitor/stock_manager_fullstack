@@ -32,14 +32,14 @@ class BrandController extends Controller
     // POST /api/marcas
     public function store(BrandRequest $request)
     {
-        $brand = $this->brandService->create($request->validate());
+        $brand = $this->brandService->create($request->validated());
         return response()->json($brand, 201);
     }
 
     // PUT /api/marcas/{id}
     public function update(BrandRequest $request, $id)
     {
-        $brand = $this->brandService->update($id, $request->validate());
+        $brand = $this->brandService->update($id, $request->validated());
         return response()->json($brand);
     }
 

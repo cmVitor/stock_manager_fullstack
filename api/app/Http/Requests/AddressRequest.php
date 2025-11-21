@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LotRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,12 @@ class LotRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'descricao' => 'required|string|max:100',
-            'dataValidade' => 'required|date',
-            'corredor' => 'required|string|max:15',
-            'prateleira' => 'required|string|max:15',
-            'secao' => 'required|string|max:45'
+            'logradouro'  => ['nullable', 'string', 'max:45'],
+            'number'      => ['nullable', 'integer'],
+            'complemento' => ['nullable', 'string', 'max:100'],
+            'city_id'     => ['required', 'integer', 'exists:cities,id'],
+            'bairro'      => ['nullable', 'string', 'max:65'],
+            'cep'         => ['nullable', 'string', 'size:8'], // CEP sem hífen
         ];
     }
 }
