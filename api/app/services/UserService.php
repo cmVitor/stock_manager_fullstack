@@ -55,6 +55,7 @@ class UserService
             throw new ModelNotFoundException("Usuário não encontrado");
         }
 
-        return $this->userRepository->delete($id);
+        $this->userRepository->delete($id);
+        return ['message' => 'Usuario removido com sucesso.'];
     }
 }

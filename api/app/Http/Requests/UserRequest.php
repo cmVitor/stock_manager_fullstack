@@ -32,7 +32,12 @@ class UserRequest extends FormRequest
                                 Rule ::in(['admin', 'funcionario'])
                              ],
             'password'    => ['required', 'string', 'max:255'],
-            'address_id'  => ['required', 'integer', 'exists:addresses,id'],
+            'city_id'     => ['required'],
+            'logradouro'  => ['required'],
+            'number'      => ['required'],
+            'complemento' => ['required'],
+            'bairro'      => ['required'],
+            'cep'         => ['required']
         ];
     }
 }
