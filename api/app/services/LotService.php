@@ -97,8 +97,8 @@ class LotService
             throw new Exception('Lot not found.');
         }
 
-        //Futuramente deve ter uma validação se existe algum StockMovement com esse lote
-        return $this->lotRepository->delete($id);
+        $this->lotRepository->delete($id);
+        return ['message' => 'Lote removido com sucesso.'];
     }
 
     public function getLotDetails()
@@ -139,6 +139,43 @@ class LotService
             });
         } catch (Exception $e) {
             throw new Exception('Erro ao criar lote: ' . $e->getMessage());
+        }
+    }
+
+    public function updateLotWithLocation(int $lotId, array $data)
+    {
+        try {
+            return DB::transaction(function () use ($lotId, $data) {
+
+                // 1. Busca o lote
+                $lot = $this->lotRepository->find($lotId);
+                if (!$lot) {
+                    throw new Exception("Lote não encontrado.");
+                }
+
+                // 2. Busca a deposit_location relacionada
+                $depositLocation = $this->depositRepository->find($lot->deposit_location_id);
+                if (!$depositLocation) {
+                    throw new Exception("Local de depósito não encontrado.");
+                }
+
+                // 3. Atualiza o depósito
+                $depositLocation->update([
+                    'aisle'   => $data['corredor']    ?? $depositLocation->aisle,
+                    'shelf'   => $data['prateleira'] ?? $depositLocation->shelf,
+                    'section' => $data['secao']       ?? $depositLocation->section,
+                ]);
+
+                // 4. Atualiza o lote
+                $lot->update([
+                    'description'       => $data['descricao']     ?? $lot->description,
+                    'expiration_date'   => $data['dataValidade']  ?? $lot->expiration_date,
+                ]);
+
+                return $lot->load('depositLocation');
+            });
+        } catch (Exception $e) {
+            throw new Exception("Erro ao atualizar lote: " . $e->getMessage());
         }
     }
 }

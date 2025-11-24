@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\StockMovement;
 use App\Repositories\Eloquent\StockMovementRepository;
 use App\Repositories\Eloquent\MovementItemRepository;
 use App\services\StockItemService;
@@ -74,4 +75,38 @@ class StockMovementService
             return $this->movementRepo->delete($id);
         });
     }
+
+    public function getAllMovementsWithItems()
+{
+    // Carrega todas as movimentações com seus relacionamentos
+    $movements = $this->movementRepo->getAll([
+        'user',
+        'movementItems.product',
+        'movementItems.supplier',
+        'movementItems.lot'
+    ]);
+
+    // Mapeia e formata cada movimentação
+    return $movements->map(function ($movement) {
+
+        $formattedItems = $movement->movementItems->map(function ($item) {
+            return [
+                'product' => $item->product->name ?? null,
+                'supplier' => $item->supplier->name ?? null,
+                'lot' => $item->lot->description ?? null,
+                'quantity' => $item->quantity,
+                'price' => $item->price,
+            ];
+        });
+
+        return [
+            'id' => $movement->id,
+            'type' => $movement->type,
+            'movement_date' => $movement->movement_date,
+            'user' => $movement->user->name ?? null,
+            'itens' => $formattedItems,
+        ];
+    });
+}
+
 }

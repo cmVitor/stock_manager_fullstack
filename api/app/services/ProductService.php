@@ -54,7 +54,8 @@ class ProductService
             throw new ModelNotFoundException("Produto não encontrado");
         }
 
-        return $this->productRepository->delete($id);
+        $this->productRepository->delete($id);
+        return ['message' => 'Produto removido com sucesso.'];
     }
 
 }
