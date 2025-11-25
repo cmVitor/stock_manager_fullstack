@@ -30,9 +30,9 @@ class SupplierController extends Controller
     }
 
     //UPDATE /api/fornecedores
-    public function update(SupplierRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $supplier = $this->supplierService->update($id, $request->validated());
+        $supplier = $this->supplierService->updateSupplierWithAddress($id, $request->all());
         return response()->json($supplier);
     }
 

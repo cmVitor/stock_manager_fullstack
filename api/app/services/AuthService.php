@@ -22,59 +22,58 @@ class AuthService
         $this->addressRepository = $addressRepository;
     }
 
-   public function register(array $data)
-{
-    try {
-        return DB::transaction(function () use ($data) {
+    public function register(array $data)
+    {
+        try {
+            return DB::transaction(function () use ($data) {
 
-            // Salva a senha em plaintext antes de criptografar
-            $plainPassword = $data['password'];
+                // Salva a senha em plaintext antes de criptografar
+                $plainPassword = $data['password'];
 
-            // 1 — Criar Address
-            $address = $this->addressRepository->create([
-                'logradouro' => $data['logradouro'],
-                'number' => $data['number'],
-                'complemento' => $data['complemento'],
-                'city_id' => $data['city_id'],
-                'bairro' => $data['bairro'],
-                'cep' => $data['cep'],
-            ]);
-
-            // 2 — Criar Usuário vinculado ao Address
-            $user = $this->userRepository->create([
-                'name' => $data['name'],
-                'cpf' => $data['cpf'],
-                'email' => $data['email'],
-                'role' => $data['role'],
-                'cpf' => $data['cpf'],
-                'password' => Hash::make($plainPassword),
-                'address_id' => $address->id,
-            ]);
-
-            // 3 — Gerar Token JWT
-            $token = JWTAuth::attempt([
-                'email' => $data['email'],
-                'password' => $plainPassword
-            ]);
-
-            if (!$token) {
-                throw ValidationException::withMessages([
-                    'auth' => ['Falha ao gerar token.']
+                // 1 — Criar Address
+                $address = $this->addressRepository->create([
+                    'logradouro' => $data['logradouro'],
+                    'number' => $data['number'],
+                    'complemento' => $data['complemento'],
+                    'city_id' => $data['city_id'],
+                    'bairro' => $data['bairro'],
+                    'cep' => $data['cep'],
                 ]);
-            }
 
-            // 4 — Retornar User + Token
-            return [
-                'user' => $user,
-                'token' => $token,
-                'address' => $address
-            ];
-        });
+                // 2 — Criar Usuário vinculado ao Address
+                $user = $this->userRepository->create([
+                    'name' => $data['name'],
+                    'cpf' => $data['cpf'],
+                    'email' => $data['email'],
+                    'role' => $data['role'],
+                    'cpf' => $data['cpf'],
+                    'password' => Hash::make($plainPassword),
+                    'address_id' => $address->id,
+                ]);
 
-    } catch (Exception $e) {
-        throw new Exception('Erro no registro: ' . $e->getMessage());
+                // 3 — Gerar Token JWT
+                $token = JWTAuth::attempt([
+                    'email' => $data['email'],
+                    'password' => $plainPassword
+                ]);
+
+                if (!$token) {
+                    throw ValidationException::withMessages([
+                        'auth' => ['Falha ao gerar token.']
+                    ]);
+                }
+
+                // 4 — Retornar User + Token
+                return [
+                    'user' => $user,
+                    'token' => $token,
+                    'address' => $address
+                ];
+            });
+        } catch (Exception $e) {
+            throw new Exception('Erro no registro: ' . $e->getMessage());
+        }
     }
-}
 
     public function login(array $credentials)
     {

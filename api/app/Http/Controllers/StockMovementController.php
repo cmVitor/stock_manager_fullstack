@@ -28,7 +28,7 @@ class StockMovementController extends Controller
     //GET /api/movements
     public function index()
     {
-        $movements = $this->movementService->getAll();
+        $movements = $this->movementService->getAllMovementsWithItems();
         return response()->json($movements);
     }
 

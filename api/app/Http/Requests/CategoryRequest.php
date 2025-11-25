@@ -15,6 +15,16 @@ class CategoryRequest extends FormRequest
     }
 
     /**
+     * Mapear campos enviados pelo front
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => $this->input('nome')
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
