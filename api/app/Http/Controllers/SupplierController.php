@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SupplierRequest;
 use App\Services\SupplierService;
 use Illuminate\Http\Request;
 
@@ -22,16 +23,16 @@ class SupplierController extends Controller
     }
 
     //POST /api/fornecedores
-    public function store(Request $request)
+    public function store(SupplierRequest $request)
     {
-        $supplier = $this->supplierService->create($request->all());
+        $supplier = $this->supplierService->create($request->validated());
         return response()->json($supplier);
     }
 
     //UPDATE /api/fornecedores
     public function update(Request $request, $id)
     {
-        $supplier = $this->supplierService->update($id, $request->all());
+        $supplier = $this->supplierService->updateSupplierWithAddress($id, $request->all());
         return response()->json($supplier);
     }
 
@@ -43,4 +44,14 @@ class SupplierController extends Controller
         );
     }
 
+    public function postSupplierAndAddress(SupplierRequest $request)
+    {
+
+        $supplier = $this->supplierService->createSupplierWithAddress($request->validated());
+
+        return response()->json([
+            'message' => 'Fornecedor criado com sucesso',
+            'data' => $supplier->load('address')
+        ], 201);
+    }
 }

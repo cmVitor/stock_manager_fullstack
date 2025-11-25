@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LotRequest;
+use App\Models\Lot;
 use App\Services\LotService;
 use Illuminate\Http\Request;
 
@@ -22,16 +24,16 @@ class LotController extends Controller
     }
 
     // POST /api/lotes
-    public function store(Request $request)
+    public function store(LotRequest $request)
     {
-        $data = $request->validate([
-            'description' => 'required|string',
-            'expiration_date' => 'required|date',
-            'deposit_location_id' => 'required|integer'
-        ]);
+        $validated = $request->validated();
 
-        $lot = $this->lotService->create($data);
-        return response()->json($lot, 201);
+        $lot = $this->lotService->createLotWithLocation($validated);
+
+        return response()->json([
+            'message' => 'Lote criado com sucesso',
+            'data' => $lot->load('depositLocation')
+        ], 201);
     }
 
     //GET /api/lotes/{id}
@@ -44,7 +46,7 @@ class LotController extends Controller
     //UPDATE /api/lotes/{id}
     public function update(Request $request, $id)
     {
-        $lot = $this->lotService->update($id, $request->all());
+        $lot = $this->lotService->updateLotWithLocation($id, $request->all());
         return response()->json($lot);
     }
 

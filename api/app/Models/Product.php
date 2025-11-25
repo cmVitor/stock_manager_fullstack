@@ -21,7 +21,7 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'nutritional_info' => 'array',
+        'nutrition_facts' => 'array',
     ];
 
     public function unit()

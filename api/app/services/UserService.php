@@ -2,16 +2,21 @@
 
 namespace App\Services;
 
+use App\Repositories\Eloquent\AddressRepository;
 use App\Repositories\Eloquent\UserRepository;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class UserService
 {
     protected $userRepository;
+    protected $addressRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository)
     {
         $this->userRepository = $userRepository;
+        $this->addressRepository = $addressRepository;
     }
 
     public function getAll()
@@ -36,7 +41,7 @@ class UserService
         });
     }
 
-    public function update ($id, array $data)
+    public function update($id, array $data)
     {
         $user = $this->userRepository->find($id);
 
@@ -55,6 +60,49 @@ class UserService
             throw new ModelNotFoundException("Usuário não encontrado");
         }
 
-        return $this->userRepository->delete($id);
+        $this->userRepository->delete($id);
+        return ['message' => 'Usuario removido com sucesso.'];
+    }
+
+    public function updateUserWithAddress(int $userId, array $data)
+    {
+        try {
+            return DB::transaction(function () use ($userId, $data) {
+
+                // 1. Busca o usuario
+                $user = $this->userRepository->find($userId);
+                if (!$user) {
+                    throw new Exception("Usuario não encontrado.");
+                }
+
+                // 2. Busca o endereço vinculado
+                $address = $this->addressRepository->find($user->address_id);
+                if (!$address) {
+                    throw new Exception("Endereço do usuario não encontrado.");
+                }
+
+                // 3. Atualiza o endereço (se os dados vierem no request)
+                $address->update([
+                    'logradouro'  => $data['logradouro']  ?? $address->logradouro,
+                    'number'      => $data['number']      ?? $address->number,
+                    'complemento' => $data['complemento'] ?? $address->complemento,
+                    'city_id'     => $data['city_id']     ?? $address->city_id,
+                    'bairro'      => $data['bairro']      ?? $address->bairro,
+                    'cep'         => $data['cep']         ?? $address->cep,
+                ]);
+
+                // 4. Atualiza o usuario
+                $user->update([
+                    'name'   => $data['name']  ?? $user->name,
+                    'cpf'  => $data['cpf'] ?? $user->cpf,
+                    'email'  => $data['email'] ?? $user->email,
+                    'role' => $data['role'] ?? $user->role
+                ]);
+
+                return $user->load('address.city.state');
+            });
+        } catch (Exception $e) {
+            throw new Exception("Erro ao atualizar usuario: " . $e->getMessage());
+        }
     }
 }

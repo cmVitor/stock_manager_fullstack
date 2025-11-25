@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,16 +15,6 @@ class CategoryRequest extends FormRequest
     }
 
     /**
-     * Mapear campos enviados pelo front
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'name' => $this->input('nome')
-        ]);
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -32,7 +22,12 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:55'
+            'logradouro'  => ['nullable', 'string', 'max:45'],
+            'number'      => ['nullable', 'integer'],
+            'complemento' => ['nullable', 'string', 'max:100'],
+            'city_id'     => ['required', 'integer', 'exists:cities,id'],
+            'bairro'      => ['nullable', 'string', 'max:65'],
+            'cep'         => ['nullable', 'string', 'size:8'], // CEP sem hífen
         ];
     }
 }

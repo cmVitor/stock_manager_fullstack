@@ -22,9 +22,11 @@ class LotRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|string|max:100',
-            'expiration_date' => 'required|date',
-            'deposit_location_id' => 'required|exists:deposit_locations,id'
+            'descricao' => 'required|string|max:100',
+            'dataValidade' => 'required|date',
+            'corredor' => 'required|string|max:15',
+            'prateleira' => 'required|string|max:15',
+            'secao' => 'required|string|max:45'
         ];
     }
 }
