@@ -15,6 +15,20 @@ class SupplierRequest extends FormRequest
     }
 
     /**
+     * Mapear campos enviados pelo front
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => $this->input('nome'),
+            'phone' => $this->input('contato'),
+            'email' => $this->input('email'),
+            'city_id' => $this->input('cidade'),
+            'number' => $this->input('numero'),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
+use App\Http\Resources\BrandResource;
 use App\Services\BrandService;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,9 @@ class BrandController extends Controller
     public function index()
     {
         $brands = $this->brandService->getAll();
-        return response()->json($brands);
+        return response()->json(
+            BrandResource::collection($brands)->response()->getData(true)
+        );
     }
 
     // GET /api/marcas/{id}
@@ -50,5 +53,4 @@ class BrandController extends Controller
             $this->brandService->delete($id)
         );
     }
-
 }

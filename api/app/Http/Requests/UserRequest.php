@@ -16,6 +16,20 @@ class UserRequest extends FormRequest
     }
 
     /**
+     * Mapear campos enviados pelo front
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => $this->input('nome'),
+            'role' => $this->input('cargo'),
+            'password' => $this->input('senha'),
+            'city_id' => $this->input('cidade'),
+            'number' => $this->input('numero'),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
