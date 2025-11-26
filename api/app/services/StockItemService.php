@@ -49,27 +49,27 @@ class StockItemService
             foreach ($mov['itens'] as $item) {
 
                 // 1. Buscar lote
-                $lot = $this->lotRepo->find($item['lot_id']);
+                $lot = $this->lotRepo->find($item['loteId']);
 
                 // 2. Procurar item de estoque existente (product + lot)
                 $stock = $this->stockRepo->findByProductAndLot(
-                    $item['product_id'],
+                    $item['produtoId'],
                     $lot->id
                 );
 
                 //   VALIDAÇÃO: SAÍDA MAIOR QUE O SALDO
-                if ($mov['type'] === 'S') {
+                if ($mov['tipo'] === 'S') {
 
                     // Não existe estoque -> não pode sair
                     if (!$stock) {
-                        throw new \Exception("Não há estoque para o produto {$item['product_id']} no lote {$lot->id}.");
+                        throw new \Exception("Não há estoque para o produto {$item['produtoId']} no lote {$lot->id}.");
                     }
 
                     // Saldo insuficiente -> não pode colocar negativo
-                    if ($stock->balance < $item['quantity']) {
+                    if ($stock->balance < $item['quantidade']) {
                         throw new \Exception(
-                            "Saldo insuficiente para o produto {$item['product_id']} no lote {$lot->id}. " .
-                                "Saldo atual: {$stock->balance}, solicitado: {$item['quantity']}."
+                            "Saldo insuficiente para o produto {$item['produtoId']} no lote {$lot->id}. " .
+                                "Saldo atual: {$stock->balance}, solicitado: {$item['quantidade']}."
                         );
                     }
                 }
@@ -77,9 +77,9 @@ class StockItemService
                 // 3. Se já existe item de estoque, atualizar saldo
                 if ($stock) {
 
-                    $novoSaldo = $mov['type'] === 'E'
-                        ? $stock->balance + $item['quantity']
-                        : $stock->balance - $item['quantity'];
+                    $novoSaldo = $mov['tipo'] === 'E'
+                        ? $stock->balance + $item['quantidade']
+                        : $stock->balance - $item['quantidade'];
 
                     $stock->balance = max($novoSaldo, 0);
                     $stock->save();
@@ -88,16 +88,16 @@ class StockItemService
                 }
 
                 // 4. Se ainda NÃO existe estoque e for ENTRADA, criar registro
-                if ($mov['type'] === 'E') {
+                if ($mov['tipo'] === 'E') {
 
-                    $product = $this->productRepo->find($item['product_id']);
+                    $product = $this->productRepo->find($item['produtoId']);
 
                     $this->stockRepo->create([
-                        'product_id'      => $item['product_id'],
+                        'product_id'      => $item['produtoId'],
                         'lot_id'          => $lot->id,
                         'expiration_date' => $lot->expiration_date,
                         'min_quantity'    => $product->min_quantity,
-                        'balance'         => $item['quantity'],
+                        'balance'         => $item['quantidade'],
                     ]);
                 }
 
@@ -113,20 +113,20 @@ class StockItemService
 
         return $items->map(function ($item) {
 
-            $hoje = now();
+            $hoje = now()->startOfDay();
             $validade = Carbon::parse($item->expiration_date);
 
             // Diferença em dias (negativo significa expirado)
-            $dias = $validade->diffInDays($hoje, false);
+            $dias = $hoje->diffInDays($validade, false);
 
             return [
                 'id'               => $item->id,
-                'product_id'       => $item->product_id,
-                'produto_nome'     => $item->product->name ?? null,
-                'lote_description' => $item->lot->description ?? null,
-                'expiration_date'  => $item->expiration_date,
-                'balance'          => $item->balance,
-                'min_quantity'     => $item->min_quantity,
+                'produtoId'       => $item->product_id,
+                'produtoNome'     => $item->product->name ?? null,
+                'lote' => $item->lot->description ?? null,
+                'validade'  => $item->expiration_date,
+                'saldo'          => $item->balance,
+                'quantidadeMinima'     => $item->min_quantity,
 
                 // Cálculos
                 'diasParaVencer'   => $dias,

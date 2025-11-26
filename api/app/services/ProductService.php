@@ -58,4 +58,23 @@ class ProductService
         return ['message' => 'Produto removido com sucesso.'];
     }
 
+    public function getProductDetails()
+    {
+        $products = $this->productRepository->with(['brand', 'category', 'unit'])->get();
+
+        return $products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'nome' => $product->name,
+                'codigo' => $product->code,
+                'quantidadeMinima' => $product->min_quantity,
+                'perecivel' => $product->perishable,
+                'informacaoNutricional' => $product->nutrition_facts,
+                'unidadeMedida' => $product->unit->name,
+                'categoria' => $product->category->name,
+                'marca' => $product->brand->name,
+            ];
+        });
+    }
+
 }

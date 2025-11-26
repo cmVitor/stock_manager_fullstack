@@ -31,12 +31,19 @@ class UserService
         return $users->map(function ($user) {
             return [
                 'id' => $user->id,
-                'name' => $user->name,
+                'nome' => $user->name,
                 'cpf' => $user->cpf,
                 'email' => $user->email,
-                'city' => $user->address->city->name ?? null,
-                'state' => $user->address->city->state->name ?? null,
+                'cargo' => $user->role,
+                'cidade' => $user->address->city->name ?? null,
+                'cidade_id' => $user->address->city->id,
+                'estado' => $user->address->city->state->name ?? null,
+                'estado_uf' => $user->address->city->state->uf ?? null,
                 'bairro' => $user->address->bairro ?? null,
+                'cep' => $user->address->cep ?? null,
+                'logradouro' => $user->address->logradouro ?? null,
+                'numero' => $user->address->number ?? null,
+                'complemento' => $user->address->complemento ?? null
             ];
         });
     }
@@ -84,19 +91,19 @@ class UserService
                 // 3. Atualiza o endereço (se os dados vierem no request)
                 $address->update([
                     'logradouro'  => $data['logradouro']  ?? $address->logradouro,
-                    'number'      => $data['number']      ?? $address->number,
+                    'number'      => $data['numero']      ?? $address->number,
                     'complemento' => $data['complemento'] ?? $address->complemento,
-                    'city_id'     => $data['city_id']     ?? $address->city_id,
+                    'city_id'     => $data['cidade_id']     ?? $address->city_id,
                     'bairro'      => $data['bairro']      ?? $address->bairro,
                     'cep'         => $data['cep']         ?? $address->cep,
                 ]);
 
                 // 4. Atualiza o usuario
                 $user->update([
-                    'name'   => $data['name']  ?? $user->name,
+                    'name'   => $data['nome']  ?? $user->name,
                     'cpf'  => $data['cpf'] ?? $user->cpf,
                     'email'  => $data['email'] ?? $user->email,
-                    'role' => $data['role'] ?? $user->role
+                    'role' => $data['cargo'] ?? $user->role
                 ]);
 
                 return $user->load('address.city.state');

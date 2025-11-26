@@ -41,4 +41,9 @@ class BaseRepository implements BaseRepositoryInterface
         $record = $this->find($id);
         return $record->delete();
     }
+
+    public function paginate(int $perPage = 10, array $relations = [])
+    {
+        return $this->model->with($relations)->paginate($perPage);
+    }
 }

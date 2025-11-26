@@ -108,11 +108,11 @@ class LotService
         return $lots->map(function ($lot) {
             return [
                 'id' => $lot->id,
-                'description' => $lot->description,
-                'expiration_date' => $lot->expiration_date,
-                'aisle' => $lot->depositLocation->aisle,
-                'shelf' => $lot->depositLocation->shelf,
-                'section' => $lot->depositLocation->section ?? null,
+                'descricao' => $lot->description,
+                'dataValidade' => $lot->expiration_date,
+                'corredor' => $lot->depositLocation->aisle,
+                'prateleira' => $lot->depositLocation->shelf,
+                'secao' => $lot->depositLocation->section ?? null,
             ];
         });
     }

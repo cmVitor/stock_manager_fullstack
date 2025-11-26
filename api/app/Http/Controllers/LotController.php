@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LotRequest;
-use App\Models\Lot;
 use App\Services\LotService;
 use Illuminate\Http\Request;
 
@@ -44,7 +43,7 @@ class LotController extends Controller
     }
 
     //UPDATE /api/lotes/{id}
-    public function update(Request $request, $id)
+    public function update(LotRequest $request, $id)
     {
         $lot = $this->lotService->updateLotWithLocation($id, $request->all());
         return response()->json($lot);

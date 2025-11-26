@@ -72,12 +72,16 @@ class SupplierService
         return $suppliers->map(function ($supplier) {
             return [
                 'id' => $supplier->id,
-                'name' => $supplier->name,
-                'phone' => $supplier->phone,
+                'nome' => $supplier->name,
+                'contato' => $supplier->phone,
                 'email' => $supplier->email,
-                'city' => $supplier->address->city->name ?? null,
-                'state' => $supplier->address->city->state->name ?? null,
+                'cidade' => $supplier->address->city->name ?? null,
+                'cidade_id' => $supplier->address->city->id ?? null,
+                'estado' => $supplier->address->city->state->name ?? null,
                 'bairro' => $supplier->address->bairro ?? null,
+                'cep' => $supplier->address->cep ?? null,
+                'logradouro' => $supplier->address->logradouro ?? null,
+                'numero' => $supplier->address->number ?? null
             ];
         });
     }
@@ -131,17 +135,17 @@ class SupplierService
                 // 3. Atualiza o endereço (se os dados vierem no request)
                 $address->update([
                     'logradouro'  => $data['logradouro']  ?? $address->logradouro,
-                    'number'      => $data['number']      ?? $address->number,
+                    'number'      => $data['numero']      ?? $address->number,
                     'complemento' => $data['complemento'] ?? $address->complemento,
-                    'city_id'     => $data['city_id']     ?? $address->city_id,
+                    'city_id'     => $data['cidade_id']     ?? $address->city_id,
                     'bairro'      => $data['bairro']      ?? $address->bairro,
                     'cep'         => $data['cep']         ?? $address->cep,
                 ]);
 
                 // 4. Atualiza o fornecedor
                 $supplier->update([
-                    'name'   => $data['name']  ?? $supplier->name,
-                    'phone'  => $data['phone'] ?? $supplier->phone,
+                    'name'   => $data['nome']  ?? $supplier->name,
+                    'phone'  => $data['contato'] ?? $supplier->phone,
                     'email'  => $data['email'] ?? $supplier->email,
                 ]);
 
