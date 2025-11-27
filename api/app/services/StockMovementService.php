@@ -40,20 +40,20 @@ class StockMovementService
 
             // 1. Criar movimentação
             $movement = $this->movementRepo->create([
-                'type' => $data['type'],
-                'movement_date' => $data['movement_date'],
-                'user_id' => $data['user_id']
+                'movement_type' => $data['tipo'],
+                'movement_date' => $data['data'],
+                'user_id' => $data['funcionarioId']
             ]);
 
             // 2. Criar itens da movimentação
             foreach ($data['itens'] as $item) {
                 $this->itemRepo->create([
                     'stock_movement_id'  => $movement->id,
-                    'product_id'   => $item['product_id'],
-                    'supplier_id'  => $item['supplier_id'],
-                    'lot_id'       => $item['lot_id'],
-                    'quantity'     => $item['quantity'],
-                    'price'        => $item['price'],
+                    'product_id'   => $item['produtoId'],
+                    'supplier_id'  => $item['fornecedorId'],
+                    'lot_id'       => $item['loteId'],
+                    'quantity'     => $item['quantidade'],
+                    'price'        => $item['preco'],
                 ]);
             }
 
@@ -77,36 +77,38 @@ class StockMovementService
     }
 
     public function getAllMovementsWithItems()
-{
-    // Carrega todas as movimentações com seus relacionamentos
-    $movements = $this->movementRepo->getAll([
-        'user',
-        'movementItems.product',
-        'movementItems.supplier',
-        'movementItems.lot'
-    ]);
+    {
+        // Carrega todas as movimentações com seus relacionamentos
+        $movements = $this->movementRepo->getAll([
+            'user',
+            'movementItems.product',
+            'movementItems.supplier',
+            'movementItems.lot'
+        ]);
 
-    // Mapeia e formata cada movimentação
-    return $movements->map(function ($movement) {
+        // Mapeia e formata cada movimentação
+        return $movements->map(function ($movement) {
 
-        $formattedItems = $movement->movementItems->map(function ($item) {
+            $formattedItems = $movement->movementItems->map(function ($item) {
+                return [
+                    'produtoId' => $item->product->id ?? null,
+                    'produtoNome' => $item->product->name,
+                    'fornecedorId' => $item->supplier->id ?? null,
+                    'fornecedorNome' => $item->supplier->name,
+                    'loteId' => $item->lot->id ?? null,
+                    'loteDescricao' => $item->lot->description,
+                    'quantidade' => $item->quantity,
+                    'preco' => $item->price,
+                ];
+            });
+
             return [
-                'product' => $item->product->name ?? null,
-                'supplier' => $item->supplier->name ?? null,
-                'lot' => $item->lot->description ?? null,
-                'quantity' => $item->quantity,
-                'price' => $item->price,
+                'id' => $movement->id,
+                'tipo' => $movement->movement_type,
+                'data' => $movement->movement_date,
+                'funcionarioId' => $movement->user->id ?? null,
+                'itens' => $formattedItems,
             ];
         });
-
-        return [
-            'id' => $movement->id,
-            'type' => $movement->type,
-            'movement_date' => $movement->movement_date,
-            'user' => $movement->user->name ?? null,
-            'itens' => $formattedItems,
-        ];
-    });
-}
-
+    }
 }

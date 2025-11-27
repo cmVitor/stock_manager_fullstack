@@ -1,0 +1,686 @@
+{
+  "users": [
+    {
+      "id": "3d75",
+      "nome": "Vitor Martins",
+      "email": "vitor.martins.castanheira@gmail.com",
+      "contato": "(62)99909-0909",
+      "senha": "vitor123",
+      "estado": "GO",
+      "cidade": "Goiânia",
+      "bairro": "Jardim América",
+      "funcionario": true,
+      "cargo": "Admin"
+    },
+    {
+      "id": "7bed",
+      "nome": "Leonardo Moreira ",
+      "email": "leo@gmail.com",
+      "contato": "62996822564",
+      "senha": "leo123",
+      "estado": "GO",
+      "cidade": "Goiânia",
+      "bairro": "Parque Anhanguera",
+      "complemento": "Casa 01",
+      "funcionario": true,
+      "cargo": "Gerente"
+    },
+    {
+      "id": "9b85",
+      "nome": "Nicolly Emilly",
+      "email": "nicolly@email.com",
+      "contato": "62839849",
+      "senha": "12345678",
+      "estado": "GO",
+      "cidade": "Goiânia",
+      "bairro": "São Marcos",
+      "complemento": "",
+      "funcionario": true,
+      "cargo": "Gerente"
+    }
+  ],
+  "products": [
+    {
+      "id": "1511",
+      "codigo": "65323",
+      "nome": "Coca Zero",
+      "marca": "Coca-Cola",
+      "categoria": "Bebidas",
+      "informacaoNutricional": "Zero Açucares",
+      "quantidadeMinima": 10,
+      "perecivel": true,
+      "unidadeMedida": "Litro"
+    },
+    {
+      "id": "e3fd",
+      "codigo": "121212",
+      "nome": "Picanha",
+      "marca": "Friboi",
+      "categoria": "Carnes",
+      "informacaoNutricional": "500g \n20g - proteína",
+      "quantidadeMinima": 1,
+      "perecivel": true,
+      "unidadeMedida": "Quilograma"
+    },
+    {
+      "id": "60ec",
+      "codigo": "23244",
+      "nome": "Linguiça",
+      "marca": "Perdigão",
+      "categoria": "Carnes",
+      "informacaoNutricional": "25g de Proteína",
+      "quantidadeMinima": 5,
+      "perecivel": true,
+      "unidadeMedida": "Quilograma"
+    },
+    {
+      "id": "7519",
+      "codigo": "67949",
+      "nome": "Nuggets",
+      "marca": "Perdigão",
+      "categoria": "Congelados",
+      "informacaoNutricional": "1000kcal",
+      "quantidadeMinima": 1,
+      "perecivel": true,
+      "unidadeMedida": "Grama"
+    },
+    {
+      "id": "9157",
+      "codigo": "542364",
+      "nome": "Iogurte de Morango",
+      "marca": "Danone",
+      "categoria": "Laticínios",
+      "informacaoNutricional": "{\"ingredientes\":\"Leite, Morango e aveia\",\"alergenicos\":\"Leite e Dervidaos, aveia e trigo\",\"porcao\":\"100g\",\"calorias\":44,\"proteinas\":4.5,\"carboidratos\":5.2,\"gorduras\":0.6,\"sodio\":47,\"acucares\":4.5}",
+      "quantidadeMinima": 1,
+      "perecivel": true,
+      "unidadeMedida": "Grama"
+    }
+  ],
+  "moviments": [
+    {
+      "id": "162b",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 5,
+          "preco": 5
+        }
+      ]
+    },
+    {
+      "id": "69b4",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 5,
+          "preco": 5
+        }
+      ]
+    },
+    {
+      "id": "a585",
+      "tipo": "Saída",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 10
+        }
+      ]
+    },
+    {
+      "id": "4ff2",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "e3fd",
+          "fornecedorId": "e2f0",
+          "fornecedorNome": "Friboi - Brasil",
+          "produtoNome": "Picanha",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 2,
+          "preco": 45.5
+        }
+      ]
+    },
+    {
+      "id": "7710",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "60ec",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Linguiça",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 2,
+          "preco": 30
+        }
+      ]
+    },
+    {
+      "id": "2579",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "60ec",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Linguiça",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 4,
+          "preco": 25
+        }
+      ]
+    },
+    {
+      "id": "6d6c",
+      "tipo": "Saída",
+      "data": "2025-10-21",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "e3fd",
+          "fornecedorId": "e2f0",
+          "fornecedorNome": "Friboi - Brasil",
+          "produtoNome": "Picanha",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 1,
+          "preco": 99
+        }
+      ]
+    },
+    {
+      "id": "30de",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "7519",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Nuggets",
+          "loteId": "35e3",
+          "loteDescricao": "Lote Congelados - Janeiro 2026",
+          "quantidade": 1,
+          "preco": 8.9
+        }
+      ]
+    },
+    {
+      "id": "37da",
+      "tipo": "Saída",
+      "data": "2025-10-21",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "7519",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Nuggets",
+          "loteId": "35e3",
+          "loteDescricao": "Lote Congelados - Janeiro 2026",
+          "quantidade": 1,
+          "preco": 12
+        }
+      ]
+    },
+    {
+      "id": "0410",
+      "tipo": "Entrada",
+      "data": "2025-10-21",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "e3fd",
+          "fornecedorId": "e2f0",
+          "fornecedorNome": "Friboi - Brasil",
+          "produtoNome": "Picanha",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 1,
+          "preco": 80.25
+        }
+      ]
+    },
+    {
+      "id": "7c48",
+      "tipo": "Entrada",
+      "data": "2025-10-22",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "7519",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Nuggets",
+          "loteId": "35e3",
+          "loteDescricao": "Lote Congelados - Janeiro 2026",
+          "quantidade": 1,
+          "preco": 12.45
+        }
+      ]
+    },
+    {
+      "id": "a6cb",
+      "tipo": "Saída",
+      "data": "2025-10-22",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "7519",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Nuggets",
+          "loteId": "35e3",
+          "loteDescricao": "Lote Congelados - Janeiro 2026",
+          "quantidade": 3,
+          "preco": 12.45
+        }
+      ]
+    },
+    {
+      "id": "dece",
+      "tipo": "Saída",
+      "data": "2025-10-22",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "e3fd",
+          "fornecedorId": "e2f0",
+          "fornecedorNome": "Friboi - Brasil",
+          "produtoNome": "Picanha",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 1,
+          "preco": 87
+        }
+      ]
+    },
+    {
+      "id": "e8f6",
+      "tipo": "Entrada",
+      "data": "2025-10-22",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 4.5
+        }
+      ]
+    },
+    {
+      "id": "97a8",
+      "tipo": "Saída",
+      "data": "2025-10-22",
+      "funcionarioId": "225d",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 5
+        }
+      ]
+    },
+    {
+      "id": "fe2f",
+      "tipo": "Saída",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "e3fd",
+          "fornecedorId": "e2f0",
+          "fornecedorNome": "Friboi - Brasil",
+          "produtoNome": "Picanha",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 1,
+          "preco": 89
+        }
+      ]
+    },
+    {
+      "id": "8d17",
+      "tipo": "Saída",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 5.66
+        }
+      ]
+    },
+    {
+      "id": "5e01",
+      "tipo": "Saída",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 4.5
+        }
+      ]
+    },
+    {
+      "id": "629f",
+      "tipo": "Entrada",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "e3fd",
+          "fornecedorId": "e2f0",
+          "fornecedorNome": "Friboi - Brasil",
+          "produtoNome": "Picanha",
+          "loteId": "a2f1",
+          "loteDescricao": "Carnes - Fevereiro 2026",
+          "quantidade": 5,
+          "preco": 78.99
+        }
+      ]
+    },
+    {
+      "id": "bd8f",
+      "tipo": "Entrada",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "7519",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Nuggets",
+          "loteId": "35e3",
+          "loteDescricao": "Lote Congelados - Janeiro 2026",
+          "quantidade": 4,
+          "preco": 20
+        }
+      ]
+    },
+    {
+      "id": "c944",
+      "tipo": "Saída",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "7519",
+          "fornecedorId": "d902",
+          "fornecedorNome": "Perdigão",
+          "produtoNome": "Nuggets",
+          "loteId": "35e3",
+          "loteDescricao": "Lote Congelados - Janeiro 2026",
+          "quantidade": 1,
+          "preco": 34.55
+        }
+      ]
+    },
+    {
+      "id": "8d29",
+      "tipo": "Entrada",
+      "data": "2025-10-29",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 4.59
+        }
+      ]
+    },
+    {
+      "id": "a3b3",
+      "tipo": "Entrada",
+      "data": "2025-10-29",
+      "funcionarioId": "7bed",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 2,
+          "preco": 4.5
+        }
+      ]
+    },
+    {
+      "id": "c7a2",
+      "tipo": "Entrada",
+      "data": "2025-11-19",
+      "funcionarioId": "3d75",
+      "itens": [
+        {
+          "produtoId": "1511",
+          "fornecedorId": "a457",
+          "fornecedorNome": "Coca-Cola - Brasil",
+          "produtoNome": "Coca Zero",
+          "loteId": "4371",
+          "loteDescricao": "Bebidas - Novembro 2025",
+          "quantidade": 1,
+          "preco": 24.44
+        }
+      ]
+    }
+  ],
+  "estoque": [
+    {
+      "id": "0afb",
+      "produtoId": "1511",
+      "produtoNome": "Coca Zero",
+      "lote": "Bebidas - Novembro 2025",
+      "validade": "2025-11-18",
+      "saldo": 11,
+      "quantidadeMinima": 10
+    },
+    {
+      "id": "6f0c",
+      "produtoId": "e3fd",
+      "produtoNome": "Picanha",
+      "lote": "Carnes - Fevereiro 2026",
+      "validade": "2026-02-18",
+      "saldo": 5,
+      "quantidadeMinima": 1
+    },
+    {
+      "id": "fba2",
+      "produtoId": "60ec",
+      "produtoNome": "Linguiça",
+      "lote": "Carnes - Fevereiro 2026",
+      "validade": "2026-02-18",
+      "saldo": 6,
+      "quantidadeMinima": 5
+    },
+    {
+      "id": "a94a",
+      "produtoId": "7519",
+      "produtoNome": "Nuggets",
+      "lote": "Lote Congelados - Janeiro 2026",
+      "validade": "2026-01-26",
+      "saldo": 3,
+      "quantidadeMinima": 1
+    }
+  ],
+  "fornecedores": [
+    {
+      "id": "a457",
+      "nome": "Coca-Cola - Brasil",
+      "contato": "11 87987656",
+      "email": "cocacola@email.com",
+      "estado": "SP",
+      "cidade": "Campinas",
+      "bairro": "Centro"
+    },
+    {
+      "id": "d902",
+      "nome": "Perdigão",
+      "contato": "111787873883",
+      "email": "perdigao@email.com",
+      "estado": "PR",
+      "cidade": "Enéas Marques",
+      "bairro": "Centro",
+      "complemento": "Predio 1208"
+    },
+    {
+      "id": "e2f0",
+      "nome": "Friboi - Brasil",
+      "contato": "31899987786",
+      "email": "friboi@brasil.com",
+      "estado": "MG",
+      "cidade": "Belo Horizonte",
+      "bairro": "Cruzeiro",
+      "complemento": "Predio 2"
+    },
+    {
+      "id": "b28e",
+      "nome": "Danone",
+      "contato": "21989898898",
+      "email": "danone@gmail.com",
+      "estado": "RJ",
+      "cidade": "Rio de Janeiro",
+      "bairro": "Botafogo",
+      "complemento": "Predio 123"
+    }
+  ],
+  "lotes": [
+    {
+      "id": "35e3",
+      "descricao": "Lote Congelados - Janeiro 2026",
+      "dataValidade": "2026-01-26",
+      "corredor": "Corredor 7",
+      "prateleira": "Prateleira 11B",
+      "secao": "Alimentos Congelados"
+    },
+    {
+      "id": "4371",
+      "descricao": "Bebidas - Novembro 2025",
+      "dataValidade": "2025-11-18",
+      "corredor": "Corredor 2",
+      "prateleira": "Prateleira 1",
+      "secao": "Bebidas"
+    },
+    {
+      "id": "a2f1",
+      "descricao": "Carnes - Fevereiro 2026",
+      "dataValidade": "2026-02-18",
+      "corredor": "Corredor 1",
+      "prateleira": "Prateleira A",
+      "secao": "Carnes"
+    },
+    {
+      "id": "748f",
+      "descricao": "Laticínios - Dezembro 2025",
+      "dataValidade": "2025-12-25",
+      "corredor": "Corredor 4",
+      "prateleira": "Prateleira 1",
+      "secao": "Laticínios"
+    }
+  ],
+  "categorias": [
+    {
+      "id": "7e8c",
+      "nome": "Carnes"
+    },
+    {
+      "id": "7279",
+      "nome": "Laticínios"
+    },
+    {
+      "id": "f235",
+      "nome": "Bebidas"
+    },
+    {
+      "id": "4e41",
+      "nome": "Congelados"
+    }
+  ],
+  "marcas": [
+    {
+      "id": "ebcd",
+      "nome": "Sadia"
+    },
+    {
+      "id": "3d12",
+      "nome": "Coca-Cola"
+    },
+    {
+      "id": "80b3",
+      "nome": "Perdigão"
+    },
+    {
+      "id": "a11d",
+      "nome": "Friboi"
+    },
+    {
+      "id": "4604",
+      "nome": "Danone"
+    }
+  ]
+}

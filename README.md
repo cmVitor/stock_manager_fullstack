@@ -146,14 +146,152 @@ A solução é composta por três camadas principais:
     
 -   **Service Layer:** Regras de negócio desacopladas dos controladores.
     
--   **Transações de Banco:** Atomicidade garantida nas movimentações.
-    
--   **Paginação e Otimização:** Consultas otimizadas e carregamento preguiçoso (Eloquent).
-    
 -   **Componentização Vue:** Reutilização e clareza de código.
     
 
 ----------
+
+
+# Guia de Execução
+
+Este projeto é composto por **três serviços** rodando em containers Docker:
+
+-   **Frontend (Vue + Vite)** — porta `3000`
+    
+-   **Backend (Laravel + PHP-FPM)** — porta `8000`
+    
+-   **Banco de Dados (PostgreSQL)** — porta `5433` (exposta para o host)
+    
+
+O ambiente é totalmente automatizado: ao subir, o backend aguarda o banco iniciar, rodará **migrations** e **seeders** automaticamente e iniciará o servidor Laravel.
+
+----------
+
+## 🚀 **Como rodar a aplicação**
+
+### **1. Pré-requisitos**
+
+-   **Docker** instalado
+    
+-   **Docker Compose** instalado
+    
+-   Nenhum serviço rodando nas portas **3000**, **8000** e **5433** no seu computador
+    
+
+----------
+
+## ▶️ **Subindo tudo**
+
+No diretório raiz do projeto, execute:
+
+`docker-compose up -d --build` 
+
+Isso irá:
+
+1.  Criar a rede Docker
+    
+2.  Subir o Postgres
+    
+3.  Subir o backend Laravel
+    
+4.  Aguardar o banco iniciar
+    
+5.  Rodar migrations + seeders automaticamente
+    
+6.  Subir o frontend Vite
+    
+7.  Servir o frontend em `localhost:3000`
+    
+
+----------
+
+## 🌐 **Acessos**
+
+Serviço
+
+URL
+
+Frontend
+
+[http://localhost:3000](http://localhost:3000)
+
+Backend API
+
+http://localhost:8000/api
+
+Banco
+
+`localhost:5433` (Postgres)
+
+----------
+
+## 🗄️ **Conectando ao banco (opcional)**
+
+Você pode acessar o banco via DBeaver ou outro cliente usando:
+
+`Host:  localhost  Port:  5433  User:  postgres  Password:  admin  Database:  stock_manager` 
+
+----------
+
+## 🛑 **Desligando os containers**
+
+`docker-compose down` 
+
+----------
+
+## ♻️ **Resetando o ambiente**
+
+Se quiser apagar o banco e gerar tudo do zero:
+
+`docker-compose down -v
+docker-compose up -d --build` 
+
+----------
+
+## 🧩 Estrutura dos containers
+
+`services/
+  app-client/ -> Frontend Vue
+  api/ -> Backend Laravel
+  postgres/ -> Banco de dados PostgreSQL
+
+docker-compose.yml` 
+
+----------
+
+## 📦 **Variáveis de ambiente**
+
+O backend usa os valores de `api/.env`.  
+As variáveis principais são:
+
+`DB_HOST=postgres DB_PORT=5432 (porta interna dentro do Docker) DB_USERNAME=postgres DB_PASSWORD=admin` 
+
+Para acessar o banco pelo host, a porta exposta é **5433**, mas dentro do Docker sempre use **5432**.
+
+----------
+
+## 🧾 **Logs**
+
+Backend Laravel:
+
+`docker logs api -f` 
+
+Frontend Vue:
+
+`docker logs app-client -f` 
+
+Banco:
+
+`docker logs postgres -f` 
+
+----------
+
+## 🛠️ Comandos úteis no container do backend
+
+`docker exec -it api bash
+php artisan migrate
+php artisan db:seed
+php artisan tinker`
 
 ## 🧾 Licença
 

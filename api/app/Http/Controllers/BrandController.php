@@ -17,12 +17,14 @@ class BrandController extends Controller
     }
 
     // GET /api/marcas
-    public function index()
+    public function index(Request $request)
     {
-        $brands = $this->brandService->getAll();
-        return response()->json(
-            BrandResource::collection($brands)->response()->getData(true)
-        );
+        $perPage = $request->get('per_page', 10);
+        $search = $request->get('search'); 
+
+        $brands = $this->brandService->getPaginated($perPage, $search);
+
+        return BrandResource::collection($brands);
     }
 
     // GET /api/marcas/{id}

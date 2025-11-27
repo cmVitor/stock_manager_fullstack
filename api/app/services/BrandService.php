@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Brand;
 use App\Repositories\Eloquent\BrandRepository;
 use Illuminate\Validation\ValidationException;
 
@@ -68,5 +69,16 @@ class BrandService
         $this->brandRepository->delete($id);
 
         return ['message' => 'Marca removida com sucesso.'];
+    }
+
+    public function getPaginated(int $perPage = 10, $search = null)
+    {
+        $query = Brand::query();
+
+        if (!empty($search)) {
+            $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        return $query->orderBy('name')->paginate($perPage);
     }
 }

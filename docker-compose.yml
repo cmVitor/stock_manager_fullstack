@@ -1,0 +1,39 @@
+services:
+
+  app-client:
+    build:
+      context: ./app-client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app-client:/app
+      - /app/node_modules
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/var/www/html:delegated
+      - /var/www/html/vendor
+    env_file:
+      - ./api/.env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: stock_manager
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

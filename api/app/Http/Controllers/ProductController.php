@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->productService->getAll();
+        $products = $this->productService->getProductDetails();
         return response()->json($products);
     }
 
@@ -34,7 +35,7 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $product = $this->productService->update($id, $request->all());
         return response()->json($product);
