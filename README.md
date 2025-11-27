@@ -57,7 +57,7 @@ A solução é composta por três camadas principais:
 
 ----------
 
-## ✅ Funcionalidades Implementadas
+## ✅ Funcionalidades Principais
 
 ### 👥 **Autenticação**
 
