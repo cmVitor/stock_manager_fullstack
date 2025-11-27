@@ -146,10 +146,6 @@ A solução é composta por três camadas principais:
     
 -   **Service Layer:** Regras de negócio desacopladas dos controladores.
     
--   **Transações de Banco:** Atomicidade garantida nas movimentações.
-    
--   **Paginação e Otimização:** Consultas otimizadas e carregamento preguiçoso (Eloquent).
-    
 -   **Componentização Vue:** Reutilização e clareza de código.
     
 
