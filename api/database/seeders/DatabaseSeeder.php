@@ -30,12 +30,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-        RegionsSeeder::class,
-        StatesSeeder::class,
-        MeasurementUnitsSeder::class,
-        CitiesSeder::class,
-        AddressesSeeder::class,
-        UsersSeeder::class
+        // RegionsSeeder::class,
+        // StatesSeeder::class,
+        // MeasurementUnitsSeder::class,
+        // CitiesSeder::class,
+        // AddressesSeeder::class,
+        // UsersSeeder::class
     ]);
     }
 }
