@@ -165,6 +165,10 @@ Este projeto é composto por **três serviços** rodando em containers Docker:
 
 O ambiente é totalmente automatizado: ao subir, o backend aguarda o banco iniciar, rodará **migrations** e **seeders** automaticamente e iniciará o servidor Laravel.
 
+Usuário pra primeiro login:
+**Email**: teste@email.com
+**Senha**: teste123
+
 ----------
 
 ## 🚀 **Como rodar a aplicação**
