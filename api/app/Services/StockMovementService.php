@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\StockMovement;
 use App\Repositories\Eloquent\StockMovementRepository;
 use App\Repositories\Eloquent\MovementItemRepository;
-use App\services\StockItemService;
+use App\Services\StockItemService;
 use Illuminate\Support\Facades\DB;
 
 class StockMovementService

@@ -12,12 +12,14 @@ import App from './App.vue'
 
 // Composables
 import { createApp } from 'vue'
+import vuetify from './plugins/vuetify'
 
 // Styles
-import 'unfonts.css'
 
 const app = createApp(App)
 
 registerPlugins(app)
 
 app.mount('#app')
+app.use(vuetify)
+app.use(registerPlugins)

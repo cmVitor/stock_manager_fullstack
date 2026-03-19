@@ -43,5 +43,6 @@ declare module 'vue' {
     StockTable: typeof import('./components/Estoque/StockTable.vue')['default']
     UserForm: typeof import('./components/Usuarios/UserForm.vue')['default']
     UserTable: typeof import('./components/Usuarios/UserTable.vue')['default']
+    VApp: typeof import('vuetify/lib')['VApp']
   }
 }

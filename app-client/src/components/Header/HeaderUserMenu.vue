@@ -18,6 +18,7 @@
 <script lang="ts">
 import { useAuthStore } from '@/stores/authStore';
 import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'HeaderUserMenu',
