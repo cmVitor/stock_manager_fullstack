@@ -23,6 +23,14 @@ class UsersSeeder extends Seeder
                 'password' => Hash::make('vitor123'),
                 'address_id' => 1
             ],
+            [
+                'name' => 'Usuario Teste',
+                'email' => 'teste@email.com',
+                'cpf' => '12345678901',
+                'role' => 'admin',
+                'password' => Hash::make('teste123'),
+                'address_id' => 1
+            ]
         ]);
     }
 }
