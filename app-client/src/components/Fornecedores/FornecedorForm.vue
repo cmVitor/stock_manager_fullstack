@@ -110,7 +110,7 @@
               prepend-inner-icon="mdi-map-marker-question"
               variant="outlined"
               rounded
-              :rules="[v => !!v || 'O CEP é obrigatório']"
+              :rules="[v => !!v && v.length === 8 || 'O CEP deve ter 8 caracteres']"
               required
             ></v-text-field>
           </v-col>
@@ -143,7 +143,7 @@
               prepend-inner-icon="mdi-text"
               variant="outlined"
               rounded
-              :rules="[v => !!v || 'O bairro é obrigatório']"
+              :rules="[v => !!v || 'O complemento é obrigatório']"
               required
             ></v-text-field>
           </v-col>

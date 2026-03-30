@@ -71,7 +71,7 @@
               prepend-inner-icon="mdi-map-marker-question"
               variant="outlined"
               rounded
-              :rules="[v => !!v || 'O CEP é obrigatório']"
+              :rules="[v => !!v && v.length === 8 || 'O CEP deve ter 8 caracteres']"
               required
             ></v-text-field>
           </v-col>
@@ -98,7 +98,7 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-text-field v-model="user.complemento" label="Complemento" prepend-inner-icon="mdi-text"
+            <v-text-field v-model="user.complemento" label="Complemento" prepend-inner-icon="mdi-text" :rules="[v => !!v || 'O complemento é obrigatório']"
               variant="outlined" color="primary" rounded />
           </v-col>
         </v-row>

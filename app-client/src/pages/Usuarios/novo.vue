@@ -6,11 +6,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
     name: 'UsuarioNovo'
-})
+}
 </script>
-
-<style>
-
-</style>

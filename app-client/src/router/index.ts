@@ -11,6 +11,7 @@ import path from 'path'
 import { components } from 'vuetify/dist/vuetify.js'
 import Guard from '@/services/middlewares/Guard'
 import CheckAdmin from '@/services/middlewares/CheckAdmin'
+import UsuarioNovo from '../pages/Usuarios/novo.vue'
 
 const routes = [
   {
@@ -23,119 +24,119 @@ const routes = [
     name: 'Home',
     path: '/home',
     component: () => import('../pages/home.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'Usuarios',
     path: '/usuarios',
     component: () => import('../pages/Usuarios/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'UsuarioNovo',
     path: '/usuarios/novo',
-    component: () => import('../pages/Usuarios/novo.vue'),
-    meta: { layout: 'default'},
+    component: UsuarioNovo,
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'RelatoriosCriticos',
     path: '/relatorios/criticos',
     component: () => import('../pages/Relatorios/criticos.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'RelatoriosVencimentos',
     path: '/relatorios/vencimentos',
     component: () => import('../pages/Relatorios/vencimentos.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'Produtos',
     path: '/produtos',
     component: () => import('../pages/Produtos/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'ProdutosNovo',
     path: '/produtos/novo',
     component: () => import('../pages/Produtos/novo.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'Movimentacoes',
     path: '/movimentacoes',
     component: () => import('../pages/Movimentacoes/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'MovimentacoesNova',
     path: '/movimentacoes/nova',
     component: () => import('../pages/Movimentacoes/nova.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'Lotes',
     path: '/lotes',
     component: () => import('../pages/lotes/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'NovoLote',
     path: '/lotes/novo',
     component: () => import('../pages/lotes/novo.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'Fornecedores',
     path: '/fornecedores',
     component: () => import('../pages/Fornecedores/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'FornecedoresNovo',
     path: '/fornecedores/novo',
     component: () => import('../pages/Fornecedores/novo.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'Estoque',
     path: '/estoque',
     component: () => import('../pages/Estoque/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'Profile',
     path: '/profile',
     component: () => import('../pages/profile.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },
   {
     name: 'Categorias',
     path: '/categorias',
     component: () => import('../pages/Categorias/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
     name: 'Marcas',
     path: '/marcas',
     component: () => import('../pages/Marcas/index.vue'),
-    meta: { layout: 'default'},
+    meta: { layout: 'default' },
     beforeEnter: CheckAdmin.auth
   },
   {
