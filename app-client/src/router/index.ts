@@ -12,6 +12,7 @@ import { components } from 'vuetify/dist/vuetify.js'
 import Guard from '@/services/middlewares/Guard'
 import CheckAdmin from '@/services/middlewares/CheckAdmin'
 import UsuarioNovo from '../pages/Usuarios/novo.vue'
+import RelatoriosCriticos from '../pages/Relatorios/criticos.vue'
 
 const routes = [
   {
@@ -44,7 +45,7 @@ const routes = [
   {
     name: 'RelatoriosCriticos',
     path: '/relatorios/criticos',
-    component: () => import('../pages/Relatorios/criticos.vue'),
+    component:RelatoriosCriticos,
     meta: { layout: 'default' },
     beforeEnter: Guard.auth
   },

@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'RelatoriosCriticos'
-})
+}
 </script>
 
 <style>
