@@ -2,7 +2,7 @@
 
 **Sistema Gerenciador de Estoque de Produtos Alimentícios**
 
-----------
+---------
 
 ## 📖 Sobre o Projeto
 
